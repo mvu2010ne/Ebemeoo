@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>💗 Tình yêu của Minh Vũ & Meo 💗</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      background-image: url('https://i.pinimg.com/originals/6a/5e/5f/6a5e5f396f728736e5b2fbd1130bfa8b.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    }
+
+    #content {
+      display: none;
+      text-align: center;
+      margin-top: 80px;
+      z-index: 2;
+    }
+
+    .title {
+      font-size: 38px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+      to { text-shadow: 0 0 20px #0ff, 0 0 40px #0ff; }
+    }
+
+    .falling-text {
+      position: absolute;
+      animation: fall linear infinite;
+      color: #00ffcc;
+      text-shadow: 0 0 5px #00ffff;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { top: -10%; opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+
+    #avatars {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 3;
+    }
+
+    #avatars img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      border: 3px solid white;
+      object-fit: cover;
+    }
+
+    .cherry-blossom {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn.pixabay.com/photo/2014/04/02/10/47/cherry-blossom-307766_960_720.png') no-repeat center;
+      background-size: contain;
+      pointer-events: none;
+      animation: fallBlossom linear infinite;
+    }
+
+    @keyframes fallBlossom {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110%) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="avatars">
+  <!-- Ảnh Minh Vũ -->
+  <img src="https://cdn.discordapp.com/attachments/1250746241431332915/1259735318676478003/minhvu.jpg" alt="Minh Vũ">
+  <!-- Ảnh Meo -->
+  <img src="https://cdn.discordapp.com/attachments/1250746241431332915/1259735318294747197/meo.jpg" alt="Meo">
+</div>
+
+<div id="content">
+  <div class="title">Anh yêu em nhiều lắm Mèo à 💗</div>
+  <audio autoplay loop>
+    <source src="https://voice-aac-dl.zdn.vn/108328113511410170/13f18757a723497d1032.aac" type="audio/aac">
+  </audio>
+</div>
+
+<script>
+  let tries = 0;
+  const maxTries = 5;
+
+  function askPassword() {
+    let pwd = prompt("Nhập mật khẩu để vào thế giới tình yêu:");
+    if (pwd === "mvuyeumeo") {
+      tries++;
+      if (tries >= maxTries) {
+        showContent();
+      } else {
+        alert(`Đúng rồi! Nhập thêm ${maxTries - tries} lần nữa nhé 💗`);
+        askPassword();
+      }
+    } else {
+      alert("Sai rồi! Thử lại nha 😅");
+      askPassword();
+    }
+  }
+
+  function showContent() {
+    document.getElementById("content").style.display = "block";
+    setInterval(createFallingText, 500);
+    setInterval(createBlossom, 700);
+  }
+
+  function createFallingText() {
+    const text = document.createElement("div");
+    text.classList.add("falling-text");
+    text.style.left = Math.random() * 100 + "vw";
+    text.style.fontSize = Math.random() < 0.5 ? "16px" : "28px";
+    text.innerText = "Minh Vũ 💗 Meo";
+    text.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(text);
+    setTimeout(() => text.remove(), 8000);
+  }
+
+  function createBlossom() {
+    const blossom = document.createElement("div");
+    blossom.classList.add("cherry-blossom");
+    blossom.style.left = Math.random() * 100 + "vw";
+    blossom.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(blossom);
+    setTimeout(() => blossom.remove(), 10000);
+  }
+
+  window.onload = askPassword;
+</script>
+
+</body>
+</html>
